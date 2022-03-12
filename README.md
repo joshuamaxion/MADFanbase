@@ -1,7 +1,7 @@
 # fanbase_app
 
  My fanbase app 
- My chat function is in MADChat
+ My chat function is in MADChat https://github.com/joshuamaxion/MADChat
 
 ## Getting Started
 
