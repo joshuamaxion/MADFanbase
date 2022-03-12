@@ -1,6 +1,7 @@
 # fanbase_app
 
-A Fanbase app
+ My fanbase app 
+ My chat function is in MADChat
 
 ## Getting Started
 
