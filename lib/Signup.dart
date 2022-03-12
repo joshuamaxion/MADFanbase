@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class Signup extends StatelessWidget {
   Signup({Key? Key}) : super(key: Key);
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -13,6 +12,7 @@ class Signup extends StatelessWidget {
   var _email = TextEditingController();
   var _password = TextEditingController();
   var _Username = TextEditingController();
+  var _display = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,9 +41,14 @@ class Signup extends StatelessWidget {
                         }
                       },
                       child: const Text("Register")),
-                  ElevatedButton(onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) =>LoginPage()));
-                  }, child: const Text("Login")),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()));
+                      },
+                      child: const Text("Login")),
                   TextButton(
                       onPressed: () {}, child: const Text("Forgot Password?"))
                 ]))));
@@ -87,20 +92,22 @@ class Signup extends StatelessWidget {
       }
       return;
     }
-    try{
+    try {
       await db
-      .collection(collectionPath)
+          .collection("users")
+          .doc(_auth.currentUser!.uid)
+          .set({"display_name": _display.text, "email": _email.text});
+    } on FirebaseException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.message ?? "Unkown Error has Occured ")));
     }
   }
 }
 
-class LoginPage extends StatelessWidget{
+class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     throw UnimplementedError();
   }
-  
- 
-  }
-
+}
